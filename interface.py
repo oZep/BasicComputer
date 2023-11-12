@@ -28,16 +28,17 @@ for i in range(2**8):
     M.append(0)
 
 T = 0
-PC_point = 0
+PC_PTR = 0
 
 def operationDecode(instruction):
     I = instruction[0]
     opcode = instruction[1:4]
     memRef = instruction[4:]
     decode(I, opcode, memRef)
+    return 
 
 def decode(I, Opcode, MemRef):
-    pass
+    return # call for each unit within the PC
 
 def hexToBinary(hex):
     '''
@@ -64,26 +65,32 @@ def hexToDecimal(hex):
 
     return decimal
 
-
-print("Input your instruction into the Memory in the format: TTT XYYYZZZ")
-print("Where T refernces where to store the instuction in Memory in Hex, X refernces I, YYY references opcode, and ZZZ references memory location in Hex")
+print("\n")
+print("Input your instruction into the Memory in the format: TTT XYYYZZZ \n")
+print("Where T refernces where to store the instuction in Memory in Hex \nX refernces I \nYYY references opcode \nZZZ references memory location in Hex")
 print("The max size of the Memory is 100")
 
-while (True):
-    print("Input your instruction into the Memory in the format: TTT 1111FFF")
-    print("Input X to cancel \n")
-    TBS = input()
-    if TBS == "X":
-        break
-    location = TBS[0:4]
-    instruction = TBS[5:12]
-    M[hexToDecimal(location)] = instruction
+def start(): 
+    while (True):
+        print("Input your instruction into the Memory in the format: TTT 1111FFF")
+        print("Input X to cancel \n")
+        TBS = input()
+        if TBS == "X":
+            print("Adding Instructions to Memory has been cancelled")
+            return 
+        else:
+            location = TBS[0:4]
+            instruction = TBS[5:12]
+            M[str(hexToDecimal(location))] = instruction
 
-
-while (PC_point != len(M)):
-    instruction = input()
-    operationDecode(instruction)
-
+def run(PC_PTR):
+    while (PC_PTR != len(M)):
+        instruction = input()
+        operationDecode(instruction)
+        PC_PTR += 1
 
 
 # 1 111 FFF
+
+start()
+run(PC_PTR) 
